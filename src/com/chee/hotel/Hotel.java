@@ -3,10 +3,19 @@ package com.chee.hotel;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * This class represents a hotel which is part of a 
+ * reservation system. The hotel contains all the rooms
+ * that is present in the hotel and provides details on the
+ * number of reserved rooms in the hotel.
+ * 
+ * @author Chee Peng
+ *
+ */
 public class Hotel {
 
-	public String name;
-	public ArrayList<Room> allRooms = new ArrayList<>();
+	protected String name;
+	protected ArrayList<Room> allRooms = new ArrayList<>();
 	protected int noOfReservedRooms;
 	
 	public Hotel(String name, Room...rooms) {
@@ -19,8 +28,16 @@ public class Hotel {
 		return allRooms.size() == noOfReservedRooms;
 	}
 	
-	public int noOfReservedRooms() {
+	public int getNoOfReservedRooms() {
 		return noOfReservedRooms;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public ArrayList<Room> getAllRooms() {
+		return allRooms;
 	}
 	
 	public boolean bookRoom(Room r) {
@@ -34,17 +51,22 @@ public class Hotel {
 		throw new IllegalArgumentException("Room provided does not exist in hotel");
 	}
 	
-	public boolean bookRoom(int i) {
-		if(i > allRooms.size()) {
+	public boolean bookRoom(int roomNo) {
+		if(roomNo > allRooms.size()) {
 			return false;
 		}
-		allRooms.get(i - 1).isReserved = true;
+		allRooms.get(roomNo - 1).isReserved = true;
 		noOfReservedRooms++;
 		return true;
 	}
 	
 	public void vacateRoom(Room r) {
 		r.isReserved = false;
+		noOfReservedRooms--;
+	}
+	
+	public void vacateRoom(int roomNo) {
+		allRooms.get(roomNo - 1).isReserved = false;
 		noOfReservedRooms--;
 	}
 	
@@ -73,19 +95,19 @@ public class Hotel {
 		h.bookRoom(s);
 		System.out.println(h);
 		System.out.println("Is hotel full? " + h.isHotelFull());
-		System.out.println("Number of reserved rooms? " + h.noOfReservedRooms());
+		System.out.println("Number of reserved rooms? " + h.getNoOfReservedRooms());
 		h.bookRoom(r);
 		System.out.println(h);
 		System.out.println("Is hotel full? " + h.isHotelFull());
-		System.out.println("Number of resrved rooms? " + h.noOfReservedRooms());
+		System.out.println("Number of resrved rooms? " + h.getNoOfReservedRooms());
 		h.vacateRoom(r);
 		System.out.println(h);
 		System.out.println("Is hotel full? " + h.isHotelFull());
-		System.out.println("Number of resrved rooms? " + h.noOfReservedRooms());
+		System.out.println("Number of resrved rooms? " + h.getNoOfReservedRooms());
 		h.vacateRoom(f);
 		h.vacateRoom(s);
 		System.out.println(h);
 		System.out.println("Is hotel full? " + h.isHotelFull());
-		System.out.println("Number of resrved rooms? " + h.noOfReservedRooms());
+		System.out.println("Number of resrved rooms? " + h.getNoOfReservedRooms());
 	}
 }

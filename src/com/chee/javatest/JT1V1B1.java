@@ -18,7 +18,6 @@ public class JT1V1B1 {
 		JT1V1B1.printHigherLower(15, 90);
 		JT1V1B1.printHigherLower(90, 90);
 		JT1V1B1.printHigherLower(100, 90);
-		JT1V1B1.printHigherLower(505, 90);
-		
+		JT1V1B1.printHigherLower(505, 90);	
 	}
 }

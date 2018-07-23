@@ -3,6 +3,23 @@ package com.chee.hotel;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * This class represents a room in the hotel
+ * A room cost is calculated based on its 
+ * base cost of the room(Type of room) and the
+ * items which are present in the room. This is
+ * to allow the cost of a room to be determined
+ * based on any additional add-ons provided by
+ * customers.
+ * 
+ * Additionally, all rooms contain a room number
+ * which is to be called upon for any changes 
+ * that are to be made to the room regarding
+ * its vacancy.
+ * 
+ * @author Chee Peng
+ *
+ */
 public class Room {
 	
 	public static final int BASIC_ROOM_COST = 100;
@@ -22,21 +39,15 @@ public class Room {
 		roomItems.addAll(Arrays.asList(items));
 		isReserved = false;
 		this.roomNo = roomNo;
+		totalCost = calculateCost();
 	}
 	
-	public Room(String name, int roomNo, ArrayList<Item> roomItems) {
-		this.name = name;
-		this.roomItems = roomItems;
-		isReserved = false;
-		this.roomNo = roomNo;
-	}
-	
-	public static int calculateCost(Room r) {
+	public int calculateCost() {
 		int total = 0;
-		for(Item i : r.roomItems) {
+		for(Item i : roomItems) {
 			total += i.getCost();
 		}
-		return total + r.roomBaseCost;
+		return total + roomBaseCost;
 	}
 	
 	public boolean getIsReserved() {
